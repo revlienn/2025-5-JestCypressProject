@@ -300,6 +300,62 @@ Manual Instantiation vs TestBed, see next course
 summary 
     TestBed is preferred, especially as tests grow in complexity or involve Angular internals (e.g. HttpClient, Router, etc.).
     Why DI Helps with Testing, more on later course
-        It avoids relying on actual services that may have external dependencies (like HTTP calls), next course
+        It avoids relying on actual services that may have external dependencies (like HTTP calls), future courses
+
+*/
+
+// COURSE 11
+/*
+
+Key Concepts in Angular Unit Testing
+
+1. Test Structure
+All unit tests follow a 3-phase pattern:
+    Setup
+        Use beforeEach() to initialize dependencies and services.
+    Execution
+        Call the method you’re testing.
+    Assertion
+        Use Jasmine expect() methods to verify outcomes.
+
+2. Mocking Dependencies
+Only the service under test (e.g., CalculatorService) should be real.
+All dependencies (e.g., LoggerService) must be mocked, using:
+    jasmine.createSpyObj('LoggerService', ['log'])
+Why Mock?
+    To test the service in isolation (unit test).
+    Using a real LoggerService makes it an integration test, which is not the goal here.
+
+3. Test Isolation
+Every test should get fresh instances of services and mocks.
+    use beforeEach() with TestBed.configureTestingModule().
+
+Jasmine Utilities for Test Control
+    xdescribe()	Skips the whole test suite.
+    xit()	Skips an individual test/spec.
+    fdescribe()	Focuses execution on a single test suite (ignores others).
+    fit()	Focuses execution on a single test/spec (ignores others).
+Examples:
+    Skipping
+        describe(..) > xdescribe('CalculatorService', () => { ... }); // Skip whole suite
+        it(...) > xit('should subtract...', () => {});           // Skip one test
+    Focus
+        describe(..) > fdescribe('CalculatorService', () => { ... }); // Focus only on this suite
+        it(...) > fit('should add...', () => {});                // Focus only on this test
+
+Best Practices Recap
+    Write one it() per functionality being tested.
+    Use spies for mocking methods and tracking calls.
+    Use TestBed and DI to match real Angular behavior.
+    Keep tests independent, isolated, and cleanly structured.
+    Disable or focus on tests using Jasmine utilities when debugging.
+
+What’s Next
+    You’ll now move on to testing a real-world Angular service — the CoursesService, which interacts with HttpClient. 
+    This will showcase:
+        Mocking Angular modules
+        Mocking HTTP requests
+        Using HttpTestingController
+
 
 */
