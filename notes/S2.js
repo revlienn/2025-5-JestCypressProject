@@ -107,3 +107,20 @@ option 1. add httpTestingController.verify(); after each flush in it
 option 2. preferred, add inside afterEach()
 
 */
+
+// COURSE 15
+/*
+
+want test savecourse/data modification request
+
+1. New it, "should save the course data"
+2. New var for the changes
+    technically you can put it inside saveCourse as the parameter, but its too long, so i put it as a var
+3. execute saveCourse and subscribe, assert 
+    that the id is 12
+    outside subscribe, the method is PUT, request body matches the changes var
+4. feed the data
+    the course AND the changes
+    use object bcos thats the data format that Vasco made
+
+*/
