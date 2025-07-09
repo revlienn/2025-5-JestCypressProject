@@ -2,6 +2,7 @@ import { TestBed } from "@angular/core/testing";
 import { CoursesService } from "./courses.service";
 import { HttpTestingController } from "@angular/common/http/testing";
 import {
+  HttpErrorResponse,
   provideHttpClient,
   withInterceptorsFromDi,
 } from "@angular/common/http";
@@ -69,6 +70,23 @@ describe("CoursesService", () => {
     );
 
     req.flush({ ...COURSES[12], ...changes });
+  });
+
+  it("should produce an error if save course fails", () => {
+    const changes: any = "hello error";
+
+    coursesService.saveCourse(12, changes).subscribe(
+      () => fail("this is an intentional error"),
+      (error: HttpErrorResponse) => {
+        expect(error.status).toBe(500);
+        expect(error.statusText).toBe("hey error");
+      }
+    );
+
+    const req = httpTestingController.expectOne("/api/courses/12");
+    expect(req.request.method).toEqual("PUT");
+
+    req.flush("Save course failed", { status: 500, statusText: "hey error" });
   });
 
   afterEach(() => {

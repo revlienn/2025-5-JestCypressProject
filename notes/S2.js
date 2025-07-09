@@ -124,3 +124,21 @@ want test savecourse/data modification request
     use object bcos thats the data format that Vasco made
 
 */
+
+// COURSE 16
+/*
+
+want test save course, but handle if there's an error
+
+1. New it, it("should produce an error if save course fails"
+2. changes can be anything, its gonna be an error anyway
+3. subscribe, notice empty the par, that'll error bcos subscribe should always has a par
+4. fail it, refresh subscribe has next, complete and error, lets do error
+    type is HttpErrorResponse, status 500, then statusText, we're gonna feed both
+5. assert that it's PUT
+6. feed the status and the text
+    notice error needs a body and metadata
+        "Save course failed" = body
+        status and statusText = metadata
+
+*/
