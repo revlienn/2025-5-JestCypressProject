@@ -82,3 +82,28 @@ Confirm that no real HTTP requests are sent.
 All data is mocked and controlled inside the test.
 
 */
+
+// COURSE 14
+/*
+
+part Assert that findcoursebyid works
+
+1. New it, "should find a course by id"
+2. Execute service
+3. Assert
+    that it returns a result/truthy
+    id is 12
+    method is GET
+4. Feed the data
+
+summary HttpRequest service test
+    execute > assert
+    assert the method type eg GET
+        careful with the link, need / at start
+    feed data
+
+part Assert we dont make any unintended http request 
+option 1. add httpTestingController.verify(); after each flush in it
+option 2. preferred, add inside afterEach()
+
+*/
