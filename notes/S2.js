@@ -142,3 +142,27 @@ want test save course, but handle if there's an error
         status and statusText = metadata
 
 */
+
+// COURSE 17
+/*
+
+want test a get request with multiple query params
+eg /api/lessons?courseId=12&filter=&sortOrder=asc&pageNumber=0&pageSize=3
+    notice the multiple params after ?
+
+1. new it, "should find a list of lessons"
+2. execute findLessons, subscribe, assert
+    lessons is true, lessons length is 3
+        why 3? see findLessons in courses.service.ts, pageSize 3
+            so length should be 3
+3. assert only one call
+4. assert method type and other query params
+    why (req) => req.url == "/api/lessons"
+        bcos if you only do "/api/lessons", then its fixed to that url
+        we have query params, not fixed, so url sould be dynamic
+            hence using req.url == "/api/lessons"
+            req.url only fetches the main, not query param, but it tells the testing that there are query params
+5. feed the payload
+    Vasco made the function, slice bcos pageSize is 3
+
+*/
