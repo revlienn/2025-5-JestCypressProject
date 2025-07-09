@@ -250,3 +250,56 @@ What’s Next
     Introduce Angular’s TestBed for real dependency injection (DI) in tests — especially when testing Angular services that use HttpClient, etc.
 
 */
+
+// COURSE 9-10
+/*
+
+side notes use TestBed.Inject() NOT TestBed.Get()
+
+theory
+What is Dependency Injection/DI
+    A design pattern used heavily in Angular.
+        eg calculator service depends on logger service
+        inject in constructor
+
+We're gonna DI our calculator service, instead of initiating it
+    so no more calulator=new CalculatorService...
+
+steps
+1. Import and Configure
+    import { TestBed } from '@angular/core/testing';
+    inside BeforeEach
+        TestBed.configureTestingModule({
+        providers: [
+            CalculatorService,
+            { provide: LoggerService, useValue: loggerSpy }
+        ]
+        });
+        side notes
+            CalculatorService, what we wanna test
+            provide: LoggerService, the actual export name of LoggerService
+            useValue: the mock implementation (our spy).
+
+2. Init calculator with TestBed DI
+    const calculator = TestBed.inject(CalculatorService);
+
+Manual Instantiation vs TestBed, see next course
+    Setup	
+        You wire up dependencies manually	
+        Angular wires up automatically
+    DI token support	
+        yes	
+        no
+    Angular internals (like Http)	
+        ❌ must be mocked manually	
+        ✅ TestBed can auto-provide
+    Closer to real app behavior	
+        ❌
+        ✅
+
+summary 
+    TestBed is preferred, especially as tests grow in complexity or involve Angular internals (e.g. HttpClient, Router, etc.).
+    Why DI Helps with Testing, more on later course
+        It avoids relying on actual services that may have external dependencies (like HTTP calls), next course
+
+*/
