@@ -198,3 +198,55 @@ Next Steps
     Move toward scalable and maintainable test structures.
 
 */
+
+// COURSE 8
+/*
+
+want
+Eliminate repeated initialization code in unit tests.
+Ensure test isolation and prepare for Angular-style dependency injection in tests.
+
+0. Change the code
+remove the approach a and approach b thing, proceed with spy on mock/approach b for both
+
+1. Identify Repeated Setup Code
+You have two repeated lines
+    const loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
+    calculator = new CalculatorService(loggerSpy);
+        Both are repeated in each spec → move to a shared setup block.
+
+2. Use Jasmine’s beforeEach() Block
+Declare shared variables at the suite level:
+    let calculator: CalculatorService;
+    let loggerSpy: any;
+Move shared logic into beforeEach(), delete const cos you define with let above
+    beforeEach(() => {
+        console.log('Calling beforeEach');
+        loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
+        calculator = new CalculatorService(loggerSpy);
+    });
+
+3. Verify Test Independence
+What happens now is that beforeEach will be called before executing both tests
+    Add console log to beforeEach, and to each test
+    Console Output Confirms
+        Calling beforeEach 
+        Add test
+        Calling beforeEach
+        Subtract test
+    beforeEach() runs before every test, ensuring:
+        Fresh state
+        No cross-test interference
+        Safe test reordering
+
+4. Best Practice Reminder
+If changing test order causes failures → your tests are not isolated properly.
+Check that:
+    Shared variables are reset in beforeEach()
+    No shared state is mutated across specs
+
+What’s Next
+    Continue using Jasmine's beforeEach() to organize logic.
+    Introduce Angular’s TestBed for real dependency injection (DI) in tests — especially when testing Angular services that use HttpClient, etc.
+
+*/

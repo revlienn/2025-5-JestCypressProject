@@ -2,26 +2,25 @@ import { CalculatorService } from "./calculator.service";
 import { LoggerService } from "./logger.service";
 
 describe("CalculatorService", () => {
+  let calculator: CalculatorService, loggerSpy: any;
+  beforeEach(() => {
+    console.log("*** beforeEach ***");
+    loggerSpy = jasmine.createSpyObj("LoggerServiceMock", ["log"]);
+    calculator = new CalculatorService(loggerSpy);
+  });
   it("should add two numbers", () => {
-    // approach a
-    const logger = new LoggerService();
-    spyOn(logger, "log");
-    const calculator = new CalculatorService(logger);
-
+    console.log("*** ADD ***");
     const result = calculator.add(2, 2);
 
     expect(result).toBe(4);
-    expect(logger.log).toHaveBeenCalledTimes(1);
+    expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
 
   it("should subtract two numbers", () => {
-    // approach b
-    const loggerMock = jasmine.createSpyObj("LoggerServiceMock", ["log"]);
-
-    const calculator = new CalculatorService(loggerMock);
+    console.log("*** SUBTRACT ***");
     const result = calculator.subtract(5, 3);
 
     expect(result).toBe(2);
-    expect(loggerMock.log).toHaveBeenCalledTimes(1);
+    expect(loggerSpy.log).toHaveBeenCalledTimes(1);
   });
 });
