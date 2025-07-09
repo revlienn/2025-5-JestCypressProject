@@ -77,3 +77,54 @@ Disable Hot Reload
     Run tests in normal mode, exit, then run again with ng test --no-watch
 
 */
+
+// COURSE 6
+/*
+
+want define the test
+
+Start with a Simple Test
+Focus: calculator.service.ts with two methods:
+    add(a, b)
+    subtract(a, b)
+
+1. Implement the First Specification: it should add two numbers
+Set up an instance of CalculatorService, it has one dependency: logger
+    const calculator = new CalculatorService(new LoggerService());
+Execute the operation, assert result
+    const result = calculator.add(2, 2);
+    expect(result).toBe(4);
+        side notes toBe has many types
+            toBeFalsy, toBeLessThan, toBeCloseTo ..., do explore
+                    change the fail() to pending()
+
+2. Run the Test
+Use Angular CLI, ng test
+    Result: Executed 1 of 2 specs – 1 passed, 1 pending
+    In browser: 'it should add two numbers appears' in green
+
+3. Implement the Second Specification: it should subtract two numbers
+    Copy and adapt the first test:
+        const result = calculator.subtract(2, 2);
+        expect(result).toBe(0);
+            Save to trigger Karma hot reload.
+    Result: Executed 2 of 2 specs – 2 passed (both specs now green)
+
+part Simulate a Failing Test
+1. Introduce a bug in subtract() method (e.g., multiply instead of subtract).
+    real result is 2, i put in expect(1)   
+    Run the test → karma msg "Expected 2 to be 1"
+        Expected <x> is what karma get
+        to be <x> is what you put
+
+2. Improve Error Messages in Assertions
+Add a custom error message to expect():
+    expect(result).toBe(0, 'Expected subtraction result to be 0');
+    Useful for debugging failing specs.
+
+
+Next topic: 
+Prepare for Advanced Testing > Introducing Jasmine spies to test whether dependencies (like LoggerService) are called properly.
+Example use case: Ensure logger.log() is called only once per operation.
+
+*/
