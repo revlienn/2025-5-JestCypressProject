@@ -128,3 +128,73 @@ Prepare for Advanced Testing > Introducing Jasmine spies to test whether depende
 Example use case: Ensure logger.log() is called only once per operation.
 
 */
+
+// COURSE 7
+/*
+
+want
+Ensure that LoggerService.log() is called only once when CalculatorService.add() is executed.
+Detect and notice fail the test if log() is called multiple times (resource optimization).
+
+solution Two Approaches to Spying
+
+part 🧪 Approach A: Spying on an Actual Instance
+Create the dependency, spyOn inside the spec
+    const logger = new LoggerService();
+    spyOn(logger, 'log');
+        'log' is the logger's method name
+Inject into calculator, expect
+    const calculator = new CalculatorService(logger);
+        ...other code...
+    expect(logger.log).toHaveBeenCalledTimes(1);
+        success
+Try an error
+    calculator.service.ts
+        inside add, execute logger.log again
+    Example error:
+        "Expected spy log to have been called once, but it was called twice."
+
+part 🧪 Approach B: Using a Jasmine Spy Object (Preferred for Unit Tests)
+Basically, the only instance should be the actual service we're testing
+    if that service has a dependency, like calculator depending on logger, then logger should be in a mock version, not init like approach A
+We can spy on the dependency
+
+Create a fake/mock logger service, inject into calculator
+    const loggerMock = jasmine.createSpyObj('LoggerServiceMock', ['log']);
+        first par is the spy name, second par is methodName
+            notice first par can be anything, methodName MUST match
+    const calculator = new CalculatorService(loggerMock);
+        How come the spy/first par name can be anything?
+            Since you’re instantiating CalculatorService manually, and it only has one dependency, it doesn't care what you name it (loggerMock, LoggerServiceMock, etc.).
+            As long as that mock has a .log() method, it works.
+            Jasmine doesn’t need to "know" the mock’s type since it only spies, not execute
+
+Perform and assert:     
+    calculator.add(2, 2);
+    expect(logger.log).toHaveBeenCalledTimes(1);
+Test passes — spy object tracks calls.
+
+part Common Mistake
+    Creating a spy object with missing methods:
+        jasmine.createSpyObj('LoggerService', []);
+        → ❌ Throws an error when calling logger.log().
+
+Advanced Spy Use: Returning Custom Values
+    If a method should return a value, use:
+        logger.log.and.returnValue('mocked return');
+    later course, dont panic
+
+Why Use Jasmine Spies?
+    Track how many times a method is called.
+        it doesnt need to know the service BUT the method name must be identical
+    Avoid relying on real service implementations (especially those with side effects).
+    Return mock values for test predictability.
+    Focus only on the unit under test (e.g., CalculatorService) — not its dependencies.
+
+Next Steps
+    Avoid repeating setup code in each test.
+        eg when initialising a spy
+    Introduce Dependency Injection into the test setup to share spy/mock creation logic.
+    Move toward scalable and maintainable test structures.
+
+*/
