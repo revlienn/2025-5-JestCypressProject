@@ -32,6 +32,10 @@ describe('CoursesCardListComponent', () => {
 
     it('should display the course list', () => {
         component.courses = setupCourses();
+        fixture.detectChanges();
+
+        console.log(el.nativeElement.outerHTML);
+
         const cards = el.queryAll(By.css('.course-card'));
 
         expect(cards).toBeTruthy('ERROR: cards does not exist');

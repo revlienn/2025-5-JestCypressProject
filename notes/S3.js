@@ -52,7 +52,7 @@ sync component test
 
 */
 
-// COURSE 21-22
+// COURSE 21
 /*
 
 want assert it displays the course list, by quierying the dom/dom interaction
@@ -67,5 +67,21 @@ want assert it displays the course list, by quierying the dom/dom interaction
     assert cards to be truthy
     assert length is 12
         at this point: Expected 0 to be 12, 'ERROR: Incorrect number of cards'.
+
+2b. fetch DOM element that'll have the data
+    query by css, .course-card
+
+COURSE 22
+
+3. debug, print the state of the HTML at certain point in time
+    console.log(el.nativeElement.outerHTML)
+    at this point: mat-card doesnt exist
+
+4. Trigger the detect change mechanism, to update the DOM
+    after feeding, fixture.detectChanges();
+        it render updates to the DOM
+    this is sync process, not async
+
+notice i missed note-taking for 2b earlier, it about fetching DOM element
 
 */
