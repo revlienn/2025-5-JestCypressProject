@@ -85,3 +85,27 @@ COURSE 22
 notice i missed note-taking for 2b earlier, it about fetching DOM element
 
 */
+
+// COURSE 23
+/*
+
+want assert it displays the first element
+
+1. feed the data, detect DOM changes
+2. init var
+    data for the first course
+    dom that'll display the first course
+    dom of first courses' title
+    dom of first courses' image
+3. assert
+    truthy
+    titles, same as from the data
+    image src, same as from the data
+
+side notes
+    for DOM, must use .nativeElement
+    other options: parents, children, listeners
+    console log title result
+        <mat-card-title _ngcontent-a-c3832827993="" class="mat-mdc-card-title">Angular Testing Course</mat-card-title>
+
+*/
