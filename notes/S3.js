@@ -204,3 +204,19 @@ side notes
     in short, wanna get value? use .and.returnValue
 
 */
+
+// COURSE 26
+/*
+
+want
+    feed ADVANCED course, assert its the only tab shows up
+solution
+    outside beforeEach, new var for the advancedCourses
+    it, copy paste the rest of the code from beginner, change the of(...)
+
+want
+    it, copy paste the rest of the code from beginner, 
+    of should be setupCourses()
+    careful, number of tabs is now 2
+
+*/
