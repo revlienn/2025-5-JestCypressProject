@@ -109,3 +109,42 @@ side notes
         <mat-card-title _ngcontent-a-c3832827993="" class="mat-mdc-card-title">Angular Testing Course</mat-card-title>
 
 */
+
+// COURSE 24
+/*
+
+side notes
+    if you add .TODO at the end of the filename extension, it'll be deactivated
+
+smart/container component
+    fetches data from service to be displayed
+    eg home component fetches data from coursesService, then feeds it to the courses-card-list, which is a presentational component
+    so home fetches, while its child courses-card-list displays
+
+1. home spec file, remove .TODO to activate
+2. vars init, outside beforeEach
+    the component, component fixture, and debug element
+3. beforeEach
+    wrap in waitForAsync, imports from angular core testing
+    imports
+        course module
+        noon animation module
+
+4. mock the service, create a spy
+    we arent going to make an actual http request, so mock it
+    var for the coursesServiceSpy
+        name it CoursesService
+        method we're gonna call, findAllCourses
+    add providers object after imports
+        provide: the service class
+        useValue: our spy object
+
+5. compile components, then
+    init the fixture, component and el
+
+6. new it, 'should create the component'
+    assert truthy
+
+stop current ng test, restart
+
+*/
