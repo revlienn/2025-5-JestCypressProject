@@ -11,6 +11,7 @@ import { setupCourses } from '../common/setup-test-data';
 describe('CoursesCardListComponent', () => {
     let component: CoursesCardListComponent;
     let fixture: ComponentFixture<CoursesCardListComponent>;
+    let el: DebugElement;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -20,6 +21,7 @@ describe('CoursesCardListComponent', () => {
             .then(() => {
                 fixture = TestBed.createComponent(CoursesCardListComponent);
                 component = fixture.componentInstance;
+                el = fixture.debugElement;
             });
     }));
 
@@ -29,7 +31,11 @@ describe('CoursesCardListComponent', () => {
     });
 
     it('should display the course list', () => {
-        pending();
+        component.courses = setupCourses();
+        const cards = el.queryAll(By.css('.course-card'));
+
+        expect(cards).toBeTruthy('ERROR: cards does not exist');
+        expect(cards.length).toBe(12, 'ERROR: Incorrect number of cards');
     });
 
     it('should display the first course', () => {

@@ -11,6 +11,8 @@ Material class change, updated on the right
 // COURSE 19-20
 /*
 
+want init setup, assert component has been init/truthy
+
 sync component test
     sync? it has a sync input, then display it
         no async service, no http req
@@ -47,5 +49,23 @@ sync component test
 4. assert the component truthy
     console log output is the comps' output/courseEdited, and whats injected to the constructor, MatDialog
 
+
+*/
+
+// COURSE 21-22
+/*
+
+want assert it displays the course list, by quierying the dom/dom interaction
+
+1. var and beforeEach
+    init el, type is debug element
+    assign fixture.debugelement inside beforeEach
+
+2. feed the data
+    inside the it spec, feed the data, assign to a var cards
+        Vasco premade the function
+    assert cards to be truthy
+    assert length is 12
+        at this point: Expected 0 to be 12, 'ERROR: Incorrect number of cards'.
 
 */
