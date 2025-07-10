@@ -220,3 +220,48 @@ want
     careful, number of tabs is now 2
 
 */
+
+// COURSE 27
+/*
+
+want when clicking either beginner/advanced, mat-card displayed should only be that category
+
+1. feed data, detect changes
+2. assert that there are 2 tabs
+3. simulate click, detect changes
+    default code
+        tabs[1].triggerEventHandler('click', { button: 0 });
+        button 0 == left click
+        button 2 == right click
+        'dblclick',button 0 for double click
+4. fetch all of the titles, assert >0
+5. assert title containing one of the advanced
+    notice dont panic, it fails even tho you detect changes after click due to some async thing, next course, section 4
+
+*/
+
+// COURSE 28 - SECTION 4
+/*
+
+why does it fail?
+    material use an animation when switching between tabs, takes 200ms
+    we didnt put this into consideration
+
+solution 1. add all expect into setTimeout
+    passed the test BUT this is a false pass
+    there's no expect in the main block, so jasmine consider it completed
+        notice WITHOUT testing expect inside the setTimeout
+    so atm jasmine inspect main block > no expect so pass it > setTimeout hits 500ms > expect fails but jasmine already passed it
+        setTimeout is also async, just like setInterval or fetch http
+    hence a false pass
+
+solution 2 done:DoneFn
+1. inside it par, add done:DoneFn
+    done tells Jasmine to execute sync code, THEN execute the async eg setTimeout block
+2. setTimeout last line
+    done()
+    now you get a real pass
+
+setTimeout is not a typical solution tho, see next course
+
+*/
