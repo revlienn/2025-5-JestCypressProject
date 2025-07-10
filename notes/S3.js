@@ -148,3 +148,59 @@ smart/container component
 stop current ng test, restart
 
 */
+
+// COURSE 25
+/*
+
+context
+    course data fetched by home comp has category props, 
+        values: beginner and advanced
+    each displayed by an ng-container with if, containing a tab
+        !beginner course==tab wont be displayed
+want
+    feed beginner course, assert its the only tab shows up
+
+1. Init var coursesService, inject inside then
+    var type is any
+    inside then, inject with testbed
+
+2. Init var for beginnerCourses
+    execute setup courses, then filter
+
+3. new it, 'should display only beginner courses'
+    execute mock coursesService, return observable
+        why observable ? 
+            because the home component expects an observable
+            plus the service findAllCourses also returns an observable
+                for test, we have to be as close as possible to the real behavior
+        from courses service, findAllCourses
+            findAllCourses(): Observable<Course[]> notice the return type
+        from home comp ts
+            beginnerCourses$: Observable<Course[]>; notice type
+            const courses$ = this.coursesService.findAllCourses();
+            this.beginnerCourses$ = this.filterByCategory(courses$, 'BEGINNER');
+
+    detect changes
+    query the tab
+        notice new class is mat-mdc-tab
+    expect only one
+
+side notes
+.and.returnValue ,why? because without it
+    It returns a Jasmine spy function, but Does nothing by default.
+        Returns undefined if called.
+        Tracks if/when/how it was called.
+
+    // Just inspecting it
+    console.log(serviceSpy.findAllCourses); // Logs the spy function itself
+
+    // Calling it
+    const result = serviceSpy.findAllCourses(); // ✅ result === undefined
+    console.log(result); // undefined
+
+    // But it tracks calls:
+    expect(serviceSpy.findAllCourses).toHaveBeenCalled(); // can still assert
+
+    in short, wanna get value? use .and.returnValue
+
+*/

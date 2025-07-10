@@ -20,6 +20,9 @@ describe('HomeComponent', () => {
     let component: HomeComponent;
     let fixture: ComponentFixture<HomeComponent>;
     let el: DebugElement;
+    let coursesService: any;
+
+    const beginnerCourses = setupCourses().filter((c) => c.category == 'BEGINNER');
 
     beforeEach(waitForAsync(() => {
         const coursesServiceSpy = jasmine.createSpyObj('CoursesService', ['findAllCourses']);
@@ -33,6 +36,7 @@ describe('HomeComponent', () => {
                 fixture = TestBed.createComponent(HomeComponent);
                 component = fixture.componentInstance;
                 el = fixture.debugElement;
+                coursesService = TestBed.inject(CoursesService);
             });
     }));
 
@@ -41,7 +45,11 @@ describe('HomeComponent', () => {
     });
 
     it('should display only beginner courses', () => {
-        pending();
+        coursesService.findAllCourses.and.returnValue(of(beginnerCourses));
+        fixture.detectChanges();
+
+        const tabs = el.queryAll(By.css('.mat-mdc-tab'));
+        expect(tabs.length).toBe(1, 'ERROR: unexpected number of tabs');
     });
 
     it('should display only advanced courses', () => {
