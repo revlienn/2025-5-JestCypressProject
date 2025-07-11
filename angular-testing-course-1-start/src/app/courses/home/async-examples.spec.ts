@@ -1,7 +1,7 @@
 import { fakeAsync, flush, flushMicrotasks, tick } from '@angular/core/testing';
 import { of, delay } from 'rxjs';
 
-fdescribe('Async testing examples', () => {
+describe('Async testing examples', () => {
     it('Async test - done()', (done: DoneFn) => {
         let test = false;
 
@@ -72,7 +72,7 @@ fdescribe('Async testing examples', () => {
         console.log('tick 1000');
     }));
 
-    fit('Async test - Observables', fakeAsync(() => {
+    it('Async test - Observables', fakeAsync(() => {
         let test = false;
 
         console.log('Creating observable');

@@ -344,3 +344,17 @@ when you add delay, it turns into microtasks
     so, either use tick only, or fakeAsync+tick
 
 */
+
+// COURSE 35
+/*
+
+refresh course 28, we use done:DoneFn and setTimeout to ensure the tab switching in home component's test pass
+    normally, we dont use setTimeout
+
+solution fakeAsync + flush
+    the cause is the animation task, material uses this when switching tab
+    so fakeAsync: execute test in the zone + aware of async tasks
+    flush: clear macrotasks queue
+        flushmicro doesnt count cos animation is in macro
+
+*/
