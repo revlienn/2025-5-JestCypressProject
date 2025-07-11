@@ -300,3 +300,16 @@ how
     you can move out the expect from setTimeout now
 
 */
+
+// COURSE 31
+/*
+
+JS has 2 kind of async queues
+    microtask: eg promise, observer, then(), subscribe()
+        first priority, will be executed first
+    macrotask/task: setTimeout, setInterval, click, scroll, api
+        second priority
+        notice if your api has .subscribe(), it'll move to microtask
+        
+
+*/

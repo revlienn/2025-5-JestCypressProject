@@ -24,4 +24,21 @@ fdescribe('Async testing examples', () => {
         flush();
         expect(test).toBeTruthy();
     }));
+
+    fit('Async test example - Plain promise', () => {
+        let test = false;
+        console.log('Creating promise');
+
+        setTimeout(() => {
+            console.log('Executing timeout');
+        });
+
+        Promise.resolve().then(() => {
+            console.log('Executing promise');
+            test = true;
+        });
+
+        console.log('Running test assertions');
+        expect(test).toBeTruthy();
+    });
 });
