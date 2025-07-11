@@ -358,3 +358,37 @@ solution fakeAsync + flush
         flushmicro doesnt count cos animation is in macro
 
 */
+
+// COURSE 37
+/*
+
+36 is just a note, async > waitForAsync now
+
+waitForAsync
+    no flush, no tick
+        meaning cant clear microtasks, no fast forwarding time
+    Commonly used in beforeEach() to ensure components are fully compiled (especially if HTML/CSS is loaded over HTTP).
+    it waits for all async to be done, then returns an observable
+        if use for testing,not beforeEach, use .whenStable.then
+        move all assertion into it
+    it supports actual httprequest to the backend
+
+fakeAsync?
+    Wraps test code to simulate passage of time.
+    tick() → simulates time
+    flush() → empties micro/macro task queues
+    Allows writing async test logic in a synchronous style (no nested .then() needed).
+    Cannot be used with real HTTP requests or dynamic template fetching.
+
+Why waitForAsync is used in beforeEach()
+Ensures Angular waits for TestBed.compileComponents() to finish if any component loads HTML/CSS asynchronously.
+Safer for component suites that might include third-party or legacy modules fetching templates via HTTP.
+
+When to Use
+    waitForAsync in beforeEach() setup phase.
+    fakeAsync in most test cases for better readability and control.
+    Avoid overusing both; only needed when truly dealing with async logic.
+
+
+
+*/

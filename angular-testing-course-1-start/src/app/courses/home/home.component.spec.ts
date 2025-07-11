@@ -69,7 +69,7 @@ fdescribe('HomeComponent', () => {
         expect(tabs.length).toBe(2, 'ERROR: unexpected number of tabs');
     });
 
-    fit('should display advanced courses when tab clicked', fakeAsync(() => {
+    it('should display advanced courses when tab clicked - fakeAsync', fakeAsync(() => {
         coursesService.findAllCourses.and.returnValue(of(setupCourses()));
         fixture.detectChanges();
 
@@ -85,5 +85,26 @@ fdescribe('HomeComponent', () => {
         const cardTitles = el.queryAll(By.css('.mat-mdc-card-title'));
         expect(cardTitles.length).toBeGreaterThan(0, 'Could not find card titles');
         expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
+    }));
+
+    it('should display advanced courses when tab clicked - waitForAsync', waitForAsync(() => {
+        coursesService.findAllCourses.and.returnValue(of(setupCourses()));
+        fixture.detectChanges();
+
+        const tabs = el.queryAll(By.css('.mat-mdc-tab'));
+        expect(tabs.length).toBe(2, 'ERROR: unexpected number of tabs');
+
+        click(tabs[1]);
+        fixture.detectChanges();
+
+        //flush();
+        //flushMicrotasks();
+
+        fixture.whenStable().then(() => {
+            console.log('called whenStable()');
+            const cardTitles = el.queryAll(By.css('.mat-mdc-card-title'));
+            expect(cardTitles.length).toBeGreaterThan(0, 'Could not find card titles');
+            expect(cardTitles[0].nativeElement.textContent).toContain('Angular Security Course');
+        });
     }));
 });
