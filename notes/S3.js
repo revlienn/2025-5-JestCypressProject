@@ -323,3 +323,24 @@ fakeAsync + flushMicrotasks
 
 
 */
+
+// COURSE 33
+/*
+
+microtask: considered lightweight, browser doesnt have a chance to update the DOM
+macrotask: heavier, so browser has time to update the DOM
+
+this course focuses on how to execute Promise and setTimeout
+    flush microtasks and tick
+
+*/
+
+// COURSE 34
+/*
+
+observables is async BUT if you dont insert pipe or delay or more operations, jasmine recognizes it as sync, even with .subscribe
+        delay is rxjs equiv of setTimeout, stil microtask tho
+when you add delay, it turns into microtasks
+    so, either use tick only, or fakeAsync+tick
+
+*/
