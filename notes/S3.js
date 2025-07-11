@@ -313,3 +313,13 @@ JS has 2 kind of async queues
         
 
 */
+
+// COURSE 32
+/*
+
+fakeAsync + flushMicrotasks
+    execute inside zone + aware of all async ops
+    execute all microtasks first
+
+
+*/
