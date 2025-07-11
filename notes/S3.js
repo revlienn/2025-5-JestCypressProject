@@ -240,7 +240,14 @@ want when clicking either beginner/advanced, mat-card displayed should only be t
 
 */
 
-// COURSE 28 - SECTION 4
+/**
+ *
+ *
+ * SECTION 4
+ *
+ */
+
+// COURSE 28
 /*
 
 why does it fail?
@@ -263,5 +270,33 @@ solution 2 done:DoneFn
     now you get a real pass
 
 setTimeout is not a typical solution tho, see next course
+
+*/
+
+// COURSE 29
+/*
+repeat done()
+    without it, marked as passing but expect ran after jasmine finish
+
+fdescribe, only run this suite
+*/
+
+// COURSE 30
+/*
+
+want
+    angular to knows the async operation, wait for the changes, update DOM, and execute the test
+
+zone: its an angular area where it recognizes all of the async operation
+    eg setTimeout, setInterval, API call etc
+fakeAsync: execute test inside zone, so it knows all of the async operation
+
+how
+    wrap everthing inside fakeAsync, the arrow func
+    tick(xx)
+        fast forwarding time
+    flush()
+        just straight up executing and not waiting
+    you can move out the expect from setTimeout now
 
 */
